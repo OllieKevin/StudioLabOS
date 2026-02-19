@@ -1,0 +1,11 @@
+> mixarlab-os@0.1.0 dev /Users/olliekevin/Desktop/家庭Notion/Toolkit-manager/mixarlab-os
+> vite
+source ~/.zshrc
+cd "/Users/olliekevin/Desktop/家庭Notion/Toolkit-manager/mixarlab-os"
+pnpm tauri dev
+
+
+source ~/.zshrc
+cd "/Users/olliekevin/Desktop/家庭Notion/Toolkit-manager/mixarlab-os"
+pnpm tauri dev
+

@@ -1,0 +1,20 @@
+{
+  "openai": "openai",
+  "claude": "claude",
+  "github-copilot": "github-copilot",
+  "figma": "figma",
+  "framer": "framer",
+  "notion": "notion",
+  "apple-developer": "apple-developer",
+  "apple-tv": "apple-tv",
+  "icloud": "icloud",
+  "gemini": "gemini",
+  "midjourney": "midjourney",
+  "perplexity": "perplexity",
+  "windsurf": "windsurf",
+  "x-twitter": "x-twitter",
+  "adobe-after-effects": "adobe-after-effects",
+  "davinci-resolve": "davinci-resolve",
+  "blender": "blender",
+  "runway": "runway"
+}
