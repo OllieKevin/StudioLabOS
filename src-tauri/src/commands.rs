@@ -54,7 +54,7 @@ fn rows_to_json(
         .query_map(params_from_iter(params.iter()), |row| {
             let mut map = Map::new();
             for (i, name) in column_names.iter().enumerate() {
-                let val = match row.get_ref(i)? {
+                let val: Value = match row.get_ref(i)? {
                     rusqlite::types::ValueRef::Null => Value::Null,
                     rusqlite::types::ValueRef::Integer(n) => Value::Number(n.into()),
                     rusqlite::types::ValueRef::Real(f) => serde_json::Number::from_f64(f)

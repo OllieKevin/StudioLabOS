@@ -12,7 +12,6 @@ pub fn init_db(app: &AppHandle) -> Result<DbState, String> {
         .path()
         .app_data_dir()
         .map_err(|e| format!("获取数据目录失败: {e}"))?;
-
     std::fs::create_dir_all(&db_dir).map_err(|e| format!("创建数据目录失败: {e}"))?;
 
     let db_path = db_dir.join("data.db");
@@ -43,8 +42,6 @@ fn run_migrations(conn: &Connection) -> Result<(), String> {
     Ok(())
 }
 
-/// Bridge serde_json::Value to rusqlite::types::Value.
-/// rusqlite does not directly accept serde_json::Value as SQL parameters.
 pub fn json_to_sql(v: &Value) -> rusqlite::types::Value {
     match v {
         Value::Null => rusqlite::types::Value::Null,

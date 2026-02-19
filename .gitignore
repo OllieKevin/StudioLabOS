@@ -3,3 +3,5 @@ dist/
 src-tauri/target/
 *.db
 .DS_Store
+*.tsbuildinfo
+mixarlab-os@0.1.0
