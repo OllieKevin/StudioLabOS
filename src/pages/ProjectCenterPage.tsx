@@ -97,7 +97,7 @@ export default function ProjectCenterPage() {
                   <h4>关联合约</h4>
                   <ul>
                     {store.detail.contracts.map((row) => (
-                      <li key={row.id}>{row.name} · ¥{row.totalAmount.toFixed(2)}</li>
+                      <li key={row.id}>{row.name} · ¥{row.amount.toFixed(2)}</li>
                     ))}
                   </ul>
 

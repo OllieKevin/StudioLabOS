@@ -1,4 +1,4 @@
-import { db } from "../lib/sqlite/provider";
+import { db } from "../lib/api/provider";
 import type { DigitalAssetDetail, DigitalAssetRow } from "../lib/types/asset";
 
 type AssetBaseRow = Omit<DigitalAssetRow, "ledgerRelationIds">;

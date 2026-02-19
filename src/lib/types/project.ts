@@ -11,7 +11,7 @@ export interface ProjectRow {
 export interface ContractRow {
   id: string;
   name: string;
-  totalAmount: number;
+  amount: number;
   projectIds: string[];
   clientIds: string[];
 }

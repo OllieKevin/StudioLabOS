@@ -1,4 +1,4 @@
-import { db } from "../lib/sqlite/provider";
+import { db } from "../lib/api/provider";
 import type { LedgerExpense, NewLedgerExpenseInput } from "../lib/types/ledger";
 
 type LedgerBase = Omit<LedgerExpense, "projectIds" | "supplierIds">;

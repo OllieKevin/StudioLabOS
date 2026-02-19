@@ -1,4 +1,4 @@
-import { db } from "../lib/sqlite/provider";
+import { db } from "../lib/api/provider";
 import type {
   ContractRow,
   ProjectExpenseRow,
@@ -45,7 +45,7 @@ export async function fetchProjectFullView(
   if (contractIds.length > 0) {
     const ph = contractIds.map(() => "?").join(", ");
     const raw = (await db.aggregate(
-      `SELECT id, name, amount as "totalAmount" FROM contracts WHERE id IN (${ph})`,
+      `SELECT id, name, amount FROM contracts WHERE id IN (${ph})`,
       contractIds,
     )) as unknown as Omit<ContractRow, "projectIds" | "clientIds">[];
 

@@ -1,27 +1,49 @@
-# MixarLabOS v2 Desktop (Tauri + React + TypeScript)
+# MixarLabOS v4 Web (Vite + Hono + SQLite)
 
 ## Status
-- 桌面端主模块已可运行（仪表盘 / 项目中心 / 报价中心 / 时间节点 / 财务总账 / 订阅 / 数字资产 / 客户 / 合约 / 供应商 / 设置）
-- 订阅管理模块已对齐 `开发文档/MixarLabOS_订阅管理模块升级执行文档.md` 的核心验收项
-- 已通过 `pnpm build` 与 `pnpm tauri build` 验证（macOS bundle 可生成）
+- 已完成从 Tauri 桌面架构到 Web 架构迁移
+- 前端：React + Vite
+- 后端：Hono + better-sqlite3
+- 数据库：SQLite（默认 `./data/data.db`）
 
-## Current Scope
-- Product architecture aligned with `开发文档/MixarLabOS_v2_Hybrid_Architecture.md`
-- Subscription module architecture aligned with `开发文档/MixarLabOS_订阅管理模块升级执行文档.md`
-- Notion DataProvider 已支持：
-  - `databases`/`data_sources` 双端点 fallback
-  - 自动分页拉取（超过 100 条继续拉取）
-- 订阅模块已支持：
-  - 列表 / 日历 / 趋势 三视图
-  - 本地缓存 `subscription_cache_v2`（TTL 5 分钟）
-  - 新增订阅（资产库 + 财务总账双库写回）
-  - 状态回写（status/select 双兼容）
-  - 本地续费提醒（Notification API）
-  - SubList 风格卡片 + 详情分栏 + selfh.st logo 自动同步脚本
-- 项目中心已支持 relation 字段名 fallback 查询
-- 报价中心已支持数据库 schema 自适配回写
+## Architecture
+- Frontend: `src/`
+- Backend: `server/`
+- API base: `/api/db/*`
+- Schema migration: `server/migrations/001_initial.sql`
 
-## Next Step
-1. 在真实 Notion 数据下继续校准字段映射（尤其商务合约库中的可选字段）。
-2. 根据业务节奏决定是否启动 `mixarlab-viewer`（Flutter iOS 只读端）仓库。
-3. 为订阅 logo 扩展私有映射（403 图标可用本地 SVG 手动补齐）。
+## Development
+1. 安装依赖
+```bash
+pnpm install
+```
+
+2. 启动后端（终端 1）
+```bash
+pnpm dev:server
+```
+
+3. 启动前端（终端 2）
+```bash
+pnpm dev
+```
+
+前端开发环境通过 Vite 代理将 `/api` 转发到 `http://localhost:3100`。
+
+## Build
+```bash
+pnpm build
+```
+
+## Run API Server (without watcher)
+```bash
+pnpm start
+```
+
+## Data Import / Export
+- 设置页支持：
+  - 导出 JSON（`POST /api/db/export`）
+  - 导入 JSON（`POST /api/db/import`，全量替换，事务回滚）
+
+## Notes
+- 本版本不再使用 Tauri 打包流程，不再产出 DMG/桌面安装包。

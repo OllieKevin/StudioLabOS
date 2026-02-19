@@ -1,4 +1,4 @@
-import { db } from "../lib/sqlite/provider";
+import { db } from "../lib/api/provider";
 import type { QuoteDraft, QuoteOption } from "../lib/types/quote";
 import { quoteSubtotal, quoteTax } from "../lib/types/quote";
 
