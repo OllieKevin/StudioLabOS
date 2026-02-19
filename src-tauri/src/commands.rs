@@ -108,6 +108,15 @@ fn sanitize_aggregate_sql(sql: &str) -> Result<String, String> {
     Ok(no_trailing.to_string())
 }
 
+fn ensure_aggregate_readonly(conn: &rusqlite::Connection, sql: &str) -> Result<(), String> {
+    let stmt = conn.prepare(sql).map_err(|e| e.to_string())?;
+    if stmt.readonly() {
+        Ok(())
+    } else {
+        Err("aggregate 只允许只读查询".to_string())
+    }
+}
+
 #[tauri::command]
 pub fn db_query(
     state: State<'_, DbState>,
@@ -362,6 +371,7 @@ pub fn db_aggregate(
     let safe_sql = sanitize_aggregate_sql(&sql)?;
 
     let conn = state.conn.lock().map_err(|e| e.to_string())?;
+    ensure_aggregate_readonly(&conn, &safe_sql)?;
     let sql_params: Vec<rusqlite::types::Value> = params
         .unwrap_or_default()
         .iter()
